@@ -20,7 +20,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/* $XFree86: xc/programs/Xserver/hw/xfree86/drivers/suncg3/cg3_driver.c,v 1.5 2003/10/30 17:37:12 tsi Exp $ */
+/* $XFree86: xc/programs/Xserver/hw/xfree86/drivers/suncg3/cg3_driver.c,v 1.4 2001/05/16 06:48:10 keithp Exp $ */
 
 #define PSZ 8
 #include "xf86.h"
@@ -97,7 +97,7 @@ static XF86ModuleVersionInfo suncg3VersRec =
 	MODULEVENDORSTRING,
 	MODINFOSTRING1,
 	MODINFOSTRING2,
-	XF86_VERSION_CURRENT,
+	XORG_VERSION_CURRENT,
 	CG3_MAJOR_VERSION, CG3_MINOR_VERSION, CG3_PATCHLEVEL,
 	ABI_CLASS_VIDEODRV,
 	ABI_VIDEODRV_VERSION,

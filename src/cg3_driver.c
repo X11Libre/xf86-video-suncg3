@@ -53,8 +53,8 @@ static void	CG3AdjustFrame(int scrnIndex, int x, int y, int flags);
 
 /* Optional functions */
 static void	CG3FreeScreen(int scrnIndex, int flags);
-static ModeStatus CG3ValidMode(int scrnIndex, DisplayModePtr mode,
-			       Bool verbose, int flags);
+static int	CG3ValidMode(int scrnIndex, DisplayModePtr mode, Bool verbose,
+			     int flags);
 
 void CG3Sync(ScrnInfoPtr pScrn);
 
@@ -97,7 +97,7 @@ static XF86ModuleVersionInfo suncg3VersRec =
 	MODULEVENDORSTRING,
 	MODINFOSTRING1,
 	MODINFOSTRING2,
-	XORG_VERSION_CURRENT,
+	XF86_VERSION_CURRENT,
 	CG3_MAJOR_VERSION, CG3_MINOR_VERSION, CG3_PATCHLEVEL,
 	ABI_CLASS_VIDEODRV,
 	ABI_VIDEODRV_VERSION,
@@ -565,7 +565,7 @@ CG3FreeScreen(int scrnIndex, int flags)
 /* Checks if a mode is suitable for the selected chipset. */
 
 /* Optional */
-static ModeStatus
+static int
 CG3ValidMode(int scrnIndex, DisplayModePtr mode, Bool verbose, int flags)
 {
     if (mode->Flags & V_INTERLACE)

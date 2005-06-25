@@ -53,8 +53,8 @@ static void	CG3AdjustFrame(int scrnIndex, int x, int y, int flags);
 
 /* Optional functions */
 static void	CG3FreeScreen(int scrnIndex, int flags);
-static int	CG3ValidMode(int scrnIndex, DisplayModePtr mode, Bool verbose,
-			     int flags);
+static ModeStatus CG3ValidMode(int scrnIndex, DisplayModePtr mode,
+			       Bool verbose, int flags);
 
 void CG3Sync(ScrnInfoPtr pScrn);
 
@@ -73,7 +73,7 @@ void CG3Sync(ScrnInfoPtr pScrn);
  * an upper-case version of the driver name.
  */
 
-DriverRec SUNCG3 = {
+_X_EXPORT DriverRec SUNCG3 = {
     VERSION,
     CG3_DRIVER_NAME,
     CG3Identify,
@@ -97,7 +97,7 @@ static XF86ModuleVersionInfo suncg3VersRec =
 	MODULEVENDORSTRING,
 	MODINFOSTRING1,
 	MODINFOSTRING2,
-	XF86_VERSION_CURRENT,
+	XORG_VERSION_CURRENT,
 	CG3_MAJOR_VERSION, CG3_MINOR_VERSION, CG3_PATCHLEVEL,
 	ABI_CLASS_VIDEODRV,
 	ABI_VIDEODRV_VERSION,
@@ -105,7 +105,7 @@ static XF86ModuleVersionInfo suncg3VersRec =
 	{0,0,0,0}
 };
 
-XF86ModuleData suncg3ModuleData = { &suncg3VersRec, cg3Setup, NULL };
+_X_EXPORT XF86ModuleData suncg3ModuleData = { &suncg3VersRec, cg3Setup, NULL };
 
 pointer
 cg3Setup(pointer module, pointer opts, int *errmaj, int *errmin)
@@ -565,7 +565,7 @@ CG3FreeScreen(int scrnIndex, int flags)
 /* Checks if a mode is suitable for the selected chipset. */
 
 /* Optional */
-static int
+static ModeStatus
 CG3ValidMode(int scrnIndex, DisplayModePtr mode, Bool verbose, int flags)
 {
     if (mode->Flags & V_INTERLACE)

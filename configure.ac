@@ -53,7 +53,6 @@ XORG_DRIVER_CHECK_EXT(RENDER, renderproto)
 
 # Checks for pkg-config packages
 PKG_CHECK_MODULES(XORG, [xorg-server xproto fontsproto $REQUIRED_MODULES])
-AC_MSG_RESULT([yes])
 sdkdir=$(pkg-config --variable=sdkdir xorg-server)
 
 # Checks for libraries.

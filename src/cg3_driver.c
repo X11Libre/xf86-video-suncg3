@@ -64,9 +64,9 @@ void CG3Sync(ScrnInfoPtr pScrn);
 #define CG3_VERSION 4000
 #define CG3_NAME "SUNCG3"
 #define CG3_DRIVER_NAME "suncg3"
-#define CG3_MAJOR_VERSION 1
-#define CG3_MINOR_VERSION 1
-#define CG3_PATCHLEVEL 0
+#define CG3_MAJOR_VERSION PACKAGE_VERSION_MAJOR
+#define CG3_MINOR_VERSION PACKAGE_VERSION_MINOR
+#define CG3_PATCHLEVEL PACKAGE_VERSION_PATCHLEVEL
 
 /* 
  * This contains the functions needed by the server after loading the driver

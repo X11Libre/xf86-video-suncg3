@@ -62,7 +62,6 @@ PKG_CHECK_MODULES(XORG, [xorg-server >= 1.0.99.901 xproto fontsproto $REQUIRED_M
 # Checks for libraries.
 
 
-AC_SUBST([XORG_CFLAGS])
 AC_SUBST([moduledir])
 
 DRIVER_NAME=suncg3

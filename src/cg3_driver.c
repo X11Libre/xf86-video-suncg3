@@ -153,12 +153,8 @@ CG3GetRec(ScrnInfoPtr pScrn)
 static void
 CG3FreeRec(ScrnInfoPtr pScrn)
 {
-    Cg3Ptr pCg3;
-
     if (pScrn->driverPrivate == NULL)
 	return;
-
-    pCg3 = GET_CG3_FROM_SCRN(pScrn);
 
     free(pScrn->driverPrivate);
     pScrn->driverPrivate = NULL;

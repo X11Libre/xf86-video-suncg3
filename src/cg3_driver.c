@@ -66,7 +66,7 @@ void CG3Sync(ScrnInfoPtr pScrn);
 #define CG3_MINOR_VERSION PACKAGE_VERSION_MINOR
 #define CG3_PATCHLEVEL PACKAGE_VERSION_PATCHLEVEL
 
-/* 
+/*
  * This contains the functions needed by the server after loading the driver
  * module.  It must be supplied, and gets passed back by the SetupProc
  * function in the dynamic case.  In the static case, a reference to this
@@ -225,7 +225,7 @@ CG3Probe(DriverPtr drv, int flags)
     numUsed = xf86MatchSbusInstances(CG3_NAME, SBUS_DEVICE_CG3,
 		   devSections, numDevSections,
 		   drv, &usedChips);
-				    
+
     free(devSections);
     if (numUsed <= 0)
 	return FALSE;
@@ -240,7 +240,7 @@ CG3Probe(DriverPtr drv, int flags)
 	 */
 	if(pEnt->active) {
 	    ScrnInfoPtr pScrn;
-	    
+
 	    /* Allocate a ScrnInfoRec and claim the slot */
 	    pScrn = xf86AllocateScreen(drv, 0);
 
@@ -282,7 +282,7 @@ CG3PreInit(ScrnInfoPtr pScrn, int flags)
      * not at the start of each server generation.  This means that
      * only things that are persistent across server generations can
      * be initialised here.  xf86Screens[] is (pScrn is a pointer to one
-     * of these).  Privates allocated using xf86AllocateScrnInfoPrivateIndex()  
+     * of these).  Privates allocated using xf86AllocateScrnInfoPrivateIndex()
      * are too, and should be used for data that must persist across
      * server generations.
      *
@@ -295,7 +295,7 @@ CG3PreInit(ScrnInfoPtr pScrn, int flags)
 	return FALSE;
     }
     pCg3 = GET_CG3_FROM_SCRN(pScrn);
-    
+
     /* Set pScrn->monitor */
     pScrn->monitor = pScrn->confScreen->monitor;
 
@@ -317,7 +317,7 @@ CG3PreInit(ScrnInfoPtr pScrn, int flags)
     /*********************
     deal with depth
     *********************/
-    
+
     if (!xf86SetDepthBpp(pScrn, 0, 0, 0, NoDepth24Support)) {
 	return FALSE;
     } else {
@@ -360,7 +360,7 @@ CG3PreInit(ScrnInfoPtr pScrn, int flags)
     /*********************
     set up clock and mode stuff
     *********************/
-    
+
     pScrn->progClock = TRUE;
 
     if(pScrn->display->virtualX || pScrn->display->virtualY) {
@@ -428,7 +428,7 @@ CG3ScreenInit(SCREEN_INIT_ARGS_DECL)
 	return FALSE;
 
     miSetPixmapDepths ();
-	
+
     /*
      * Call the framebuffer layer's ScreenInit function, and fill in other
      * pScreen fields.
@@ -489,7 +489,7 @@ CG3SwitchMode(SWITCH_MODE_ARGS_DECL)
  * displayed location in the video memory.
  */
 /* Usually mandatory */
-static void 
+static void
 CG3AdjustFrame(ADJUST_FRAME_ARGS_DECL)
 {
     /* we don't support virtual desktops */
@@ -536,7 +536,7 @@ CG3CloseScreen(CLOSE_SCREEN_ARGS_DECL)
     pScrn->vtSema = FALSE;
     xf86UnmapSbusMem(pCg3->psdp, pCg3->fb,
 		     (pCg3->psdp->width * pCg3->psdp->height));
-    
+
     pScreen->CloseScreen = pCg3->CloseScreen;
     return (*pScreen->CloseScreen)(CLOSE_SCREEN_ARGS);
 }

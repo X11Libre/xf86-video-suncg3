@@ -14,7 +14,7 @@ suncg3 \- CG3 video driver
 .SH DESCRIPTION
 .B suncg3
 is an
-.B Xorg
+.B XLibre
 driver for Sun CG3 video cards.
 THIS MAN PAGE NEEDS TO BE FILLED IN.
 .SH SUPPORTED HARDWARE
@@ -27,7 +27,7 @@ Please refer to
 .BR xorg.conf (5) for general configuration details.
 This section only covers configuration details specific to this driver.
 .SH "SEE ALSO"
-.BR Xorg (1),
+.BR XLibre (1),
 .BR Xserver (1),
 .BR xorg.conf (5),
 .BR X (7)

@@ -88,8 +88,6 @@ static const OptionInfoRec CG3Options[] = {
     { -1,			NULL,		OPTV_NONE,	{0}, FALSE }
 };
 
-#ifdef XFree86LOADER
-
 static MODULESETUPPROTO(cg3Setup);
 
 static XF86ModuleVersionInfo suncg3VersRec =
@@ -132,8 +130,6 @@ cg3Setup(pointer module, pointer opts, int *errmaj, int *errmin)
 	return NULL;
     }
 }
-
-#endif /* XFree86LOADER */
 
 static Bool
 CG3GetRec(ScrnInfoPtr pScrn)

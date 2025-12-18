@@ -62,9 +62,6 @@ PKG_CHECK_MODULES(XORG, [xorg-server >= 1.18 xproto fontsproto $REQUIRED_MODULES
 
 AC_SUBST([moduledir])
 
-DRIVER_NAME=suncg3
-AC_SUBST([DRIVER_NAME])
-
 AC_CONFIG_FILES([
                 Makefile
                 src/Makefile

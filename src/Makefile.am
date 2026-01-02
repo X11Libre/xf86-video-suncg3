@@ -30,5 +30,4 @@ suncg3_drv_ladir = @moduledir@/drivers
 
 suncg3_drv_la_SOURCES = \
          cg3_driver.c \
-         cg3.h \
-         compat-api.h
+         cg3.h

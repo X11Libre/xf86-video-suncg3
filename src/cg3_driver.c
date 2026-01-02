@@ -32,26 +32,24 @@
 #include "xf86cmap.h"
 #include "cg3.h"
 
-#include "compat-api.h"
-
 static const OptionInfoRec * CG3AvailableOptions(int chipid, int busid);
 static void	CG3Identify(int flags);
 static Bool	CG3Probe(DriverPtr drv, int flags);
 static Bool	CG3PreInit(ScrnInfoPtr pScrn, int flags);
-static Bool	CG3ScreenInit(SCREEN_INIT_ARGS_DECL);
-static Bool	CG3EnterVT(VT_FUNC_ARGS_DECL);
-static void	CG3LeaveVT(VT_FUNC_ARGS_DECL);
-static Bool	CG3CloseScreen(CLOSE_SCREEN_ARGS_DECL);
+static Bool	CG3ScreenInit(ScreenPtr pScreen, int argc, char **argv);
+static Bool	CG3EnterVT(ScrnInfoPtr arg);
+static void	CG3LeaveVT(ScrnInfoPtr arg);
+static Bool	CG3CloseScreen(ScreenPtr pScreen);
 static Bool	CG3SaveScreen(ScreenPtr pScreen, int mode);
 
 /* Required if the driver supports mode switching */
-static Bool	CG3SwitchMode(SWITCH_MODE_ARGS_DECL);
+static Bool	CG3SwitchMode(ScrnInfoPtr arg, DisplayModePtr mode);
 /* Required if the driver supports moving the viewport */
-static void	CG3AdjustFrame(ADJUST_FRAME_ARGS_DECL);
+static void	CG3AdjustFrame(ScrnInfoPtr arg, int x, int y);
 
 /* Optional functions */
-static void	CG3FreeScreen(FREE_SCREEN_ARGS_DECL);
-static ModeStatus CG3ValidMode(SCRN_ARG_TYPE arg, DisplayModePtr mode,
+static void	CG3FreeScreen(ScrnInfoPtr arg);
+static ModeStatus CG3ValidMode(ScrnInfoPtr arg, DisplayModePtr mode,
 			       Bool verbose, int flags);
 
 void CG3Sync(ScrnInfoPtr pScrn);
@@ -378,7 +376,7 @@ CG3PreInit(ScrnInfoPtr pScrn, int flags)
 /* This gets called at the start of each server generation */
 
 static Bool
-CG3ScreenInit(SCREEN_INIT_ARGS_DECL)
+CG3ScreenInit(ScreenPtr pScreen, int argc, char **argv)
 {
     ScrnInfoPtr pScrn = xf86ScreenToScrn(pScreen);
     Cg3Ptr pCg3;
@@ -471,7 +469,7 @@ CG3ScreenInit(SCREEN_INIT_ARGS_DECL)
 
 /* Usually mandatory */
 static Bool
-CG3SwitchMode(SWITCH_MODE_ARGS_DECL)
+CG3SwitchMode(ScrnInfoPtr arg, DisplayModePtr mode)
 {
     return TRUE;
 }
@@ -483,7 +481,7 @@ CG3SwitchMode(SWITCH_MODE_ARGS_DECL)
  */
 /* Usually mandatory */
 static void
-CG3AdjustFrame(ADJUST_FRAME_ARGS_DECL)
+CG3AdjustFrame(ScrnInfoPtr arg, int x, int y)
 {
     /* we don't support virtual desktops */
     return;
@@ -496,7 +494,7 @@ CG3AdjustFrame(ADJUST_FRAME_ARGS_DECL)
 
 /* Mandatory */
 static Bool
-CG3EnterVT(VT_FUNC_ARGS_DECL)
+CG3EnterVT(ScrnInfoPtr arg)
 {
     return TRUE;
 }
@@ -508,7 +506,7 @@ CG3EnterVT(VT_FUNC_ARGS_DECL)
 
 /* Mandatory */
 static void
-CG3LeaveVT(VT_FUNC_ARGS_DECL)
+CG3LeaveVT(ScrnInfoPtr arg)
 {
     return;
 }
@@ -521,7 +519,7 @@ CG3LeaveVT(VT_FUNC_ARGS_DECL)
 
 /* Mandatory */
 static Bool
-CG3CloseScreen(CLOSE_SCREEN_ARGS_DECL)
+CG3CloseScreen(ScreenPtr pScreen)
 {
     ScrnInfoPtr pScrn = xf86ScreenToScrn(pScreen);
     Cg3Ptr pCg3 = GET_CG3_FROM_SCRN(pScrn);
@@ -531,7 +529,7 @@ CG3CloseScreen(CLOSE_SCREEN_ARGS_DECL)
 		     (pCg3->psdp->width * pCg3->psdp->height));
 
     pScreen->CloseScreen = pCg3->CloseScreen;
-    return (*pScreen->CloseScreen)(CLOSE_SCREEN_ARGS);
+    return (*pScreen->CloseScreen)(pScreen);
 }
 
 
@@ -539,9 +537,8 @@ CG3CloseScreen(CLOSE_SCREEN_ARGS_DECL)
 
 /* Optional */
 static void
-CG3FreeScreen(FREE_SCREEN_ARGS_DECL)
+CG3FreeScreen(ScrnInfoPtr pScrn)
 {
-    SCRN_INFO_PTR(arg);
     CG3FreeRec(pScrn);
 }
 
@@ -550,7 +547,7 @@ CG3FreeScreen(FREE_SCREEN_ARGS_DECL)
 
 /* Optional */
 static ModeStatus
-CG3ValidMode(SCRN_ARG_TYPE arg, DisplayModePtr mode, Bool verbose, int flags)
+CG3ValidMode(ScrnInfoPtr arg, DisplayModePtr mode, Bool verbose, int flags)
 {
     if (mode->Flags & V_INTERLACE)
 	return(MODE_BAD);

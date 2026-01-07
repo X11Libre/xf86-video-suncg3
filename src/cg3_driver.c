@@ -101,8 +101,8 @@ static XF86ModuleVersionInfo suncg3VersRec =
 
 _X_EXPORT XF86ModuleData suncg3ModuleData = { &suncg3VersRec, cg3Setup, NULL };
 
-pointer
-cg3Setup(pointer module, pointer opts, int *errmaj, int *errmin)
+void *
+cg3Setup(void *module, void *opts, int *errmaj, int *errmin)
 {
     static Bool setupDone = FALSE;
 
@@ -119,7 +119,7 @@ cg3Setup(pointer module, pointer opts, int *errmaj, int *errmin)
 	 * The return value must be non-NULL on success even though there
 	 * is no TearDownProc.
 	 */
-	return (pointer)TRUE;
+	return (void*)TRUE;
     } else {
 	if (errmaj) *errmaj = LDR_ONCEONLY;
 	return NULL;

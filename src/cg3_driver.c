@@ -263,7 +263,6 @@ CG3PreInit(ScrnInfoPtr pScrn, int flags)
 {
     Cg3Ptr pCg3;
     sbusDevicePtr psdp;
-    MessageType from;
     int i;
 
     if (flags & PROBE_DETECT) return FALSE;
@@ -339,9 +338,6 @@ CG3PreInit(ScrnInfoPtr pScrn, int flags)
 	    return FALSE;
 	}
     }
-
-    /* Set the bits per RGB for 8bpp mode */
-    from = X_DEFAULT;
 
     if (xf86LoadSubModule(pScrn, "fb") == NULL) {
 	CG3FreeRec(pScrn);

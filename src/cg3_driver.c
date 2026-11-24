@@ -60,6 +60,7 @@ void CG3Sync(ScrnInfoPtr pScrn);
 #define CG3_MAJOR_VERSION PACKAGE_VERSION_MAJOR
 #define CG3_MINOR_VERSION PACKAGE_VERSION_MINOR
 #define CG3_PATCHLEVEL PACKAGE_VERSION_PATCHLEVEL
+#define CG3_VERSION_SUFFIX PACKAGE_VERSION_SUFFIX
 
 /*
  * This contains the functions needed by the server after loading the driver
@@ -100,6 +101,9 @@ static XF86ModuleVersionInfo suncg3VersRec =
 };
 
 _X_EXPORT XF86ModuleData suncg3ModuleData = { &suncg3VersRec, cg3Setup, NULL };
+#ifdef XF86_MODULE_VERSION_SUFFIX
+XF86_MODULE_VERSION_SUFFIX(suncg3, CG3_VERSION_SUFFIX);
+#endif
 
 void *
 cg3Setup(void *module, void *opts, int *errmaj, int *errmin)
